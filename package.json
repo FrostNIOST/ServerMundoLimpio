@@ -1,0 +1,25 @@
+{
+  "name": "servermundolimpio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrostNIOST/ServerMundoLimpio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FrostNIOST/ServerMundoLimpio/issues"
+  },
+  "homepage": "https://github.com/FrostNIOST/ServerMundoLimpio#readme",
+  "dependencies": {
+    "express": "^4.19.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  }
+}
