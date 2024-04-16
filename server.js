@@ -10,10 +10,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //routes
-app.use(require('./scr/routers/routers'));
+app.use(require('./scr/routers/routes_clientes'));
+app.use(require('./scr/routers/routes_empresa'));
+app.use(require('./scr/routers/routes_recolecciones'));
 
 //Inicializar el servidor
 app.listen(3000, () => {
 console.log( `Server is running on port ${app.get('port')}`);
 });
-asdad
