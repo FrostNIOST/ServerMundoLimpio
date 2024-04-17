@@ -1,7 +1,9 @@
+/** @module src/routers/routes_empresa{*}*/
+
 const { Router } = require('express'); 
 const router = Router(); 
 //routes 
-const usersController = require('../controllers/empresas_controller');
+const empresas_controller = require('../controllers/empresas_controller');
 router.get('/empresas', empresas_controller.listar);
 router.post('/empresas/register', empresas_controller.register);
 router.post('/empresas/password', empresas_controller.password);
