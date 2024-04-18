@@ -1,40 +1,43 @@
 
 
-const mysql = require('../config/config');
+const db = require('../config/config');
 const User = {};
-User.create = (user, result) => {
-    const sql = `INSERT INTO users(
-email, 
-name,
-lastname,
-phone,
-image,
-password,
-created_at,
-updated_at
-)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-        ;
-    db.query(
-        sql,
-        [
-            Clientes.email,
-            Clientes.name,
-            Clientes.lastname,
-            clientesr.phone,
-            Clientes.image,
-            Clientes.password
-        ],
-        (err, res) => {
-            if (err) {
-                console.log('error: ', err);
-                result(err, null);
-            }
-            else {
-                console.log('Id del nuevo Usuario: ', res.insertId);
-                result(null, res.insertId);
+
+
+User.register = (user, result) => {
+    //Revisa si el cliente existe
+    const sql = 'SELECT id_cliente FROM cliente WHERE correo = ?';
+    db.query(sql, [user.email], (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            if (res.length > 0) {
+                result(null, { message: 'Cliente ya registrado' });
+            } else {
+                //Si no existe, lo registra
+                const sql = 'INSERT INTO cliente (nombre, correo, celular, fecha_nacimiento, password) VALUES (?, ?, ?, ?, ?); ';
+                db.query(
+                    sql,
+                    [user.nombre,
+                    user.correo,
+                    user.celular,
+                    user.fecha_nacimiento,
+                    user.password],
+                    (err, res) => {
+                        if (err) {
+                            result(err, null);
+                        } else {
+                            result(null, { message: 'ID Cliente registrado: ' + res.insertId });
+                        }
+                    }
+                );
             }
         }
-    )
+    });
 };
+
+
+
+
+
 module.exports = User;

@@ -1,7 +1,7 @@
 /** @module src/routers/routes_empresa{*}*/
 
-const { Router } = require('express'); 
-const router = Router(); 
+const { Router } = require('express');
+const router = Router();
 //routes 
 const empresas_controller = require('../controllers/empresas_controller');
 router.get('/empresas', empresas_controller.listar);

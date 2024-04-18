@@ -21,5 +21,5 @@ app.use(require('./scr/routers/routes_cliente'));
 
 //Inicializar el servidor
 app.listen(3000, () => {
-console.log( `Server is running on port ${app.get('port')}`);
+    console.log(`Server is running on port ${app.get('port')}`);
 });
