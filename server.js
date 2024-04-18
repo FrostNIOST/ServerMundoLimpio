@@ -12,12 +12,12 @@ app.set('json spaces', 2);
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 
 //routes
 app.use(require('./scr/routers/routes_cliente'));
-app.use(require('./scr/routers/routes_empresa'));
-app.use(require('./scr/routers/routes_recoleccion'));
+//app.use(require('./scr/routers/routes_empresa'));
+//app.use(require('./scr/routers/routes_recoleccion'));
 
 //Inicializar el servidor
 app.listen(3000, () => {
