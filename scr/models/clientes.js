@@ -34,6 +34,44 @@ User.register = (user, result) => {
     });
 };
 
+User.login = (user, result) => {
+    const sql =
+        `SELECT id_cliente, nombre, 'cliente' AS tipo FROM cliente WHERE correo = ? AND password = ? 
+    UNION ALL 
+    SELECT id_empresa, nombre_empresa ,'empresa' AS tipo FROM empresa WHERE correo =? AND password = ?` ;
+
+    db.query(
+        sql,
+        [
+            user.email,
+            user.password,
+            user.email,
+            user.password,
+        ],
+        (err, res) => {
+            if (err) {
+                console.log('Model error: ', err); //for debugging
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        }
+    )
+};
+
+User.updatePassword = (user, result) => {
+    const sql = 'UPDATE cliente SET password = ? WHERE id_cliente = ?';
+    db.query(sql, [user.password, user.id], (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
+
+
+
 
 
 
