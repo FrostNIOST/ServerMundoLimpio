@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../config/config');
 const User = {};
 
@@ -5,7 +6,7 @@ const User = {};
 User.register = (user, result) => {
     //Revisa si el cliente existe
     const sql = `SELECT id_cliente FROM cliente WHERE correo = ?`;
-    db.query(sql, [user.email], (err, res) => {
+    db.query(sql, [user.correo], (err, res) => {
         if (err) {
             result(err, null);
         } else {
@@ -40,12 +41,11 @@ User.login = (user, result) => {
     UNION ALL 
     SELECT id_empresa, nombre_empresa ,'empresa' AS tipo FROM empresa WHERE correo =? AND password = ?` ;
 
-    db.query(
-        sql,
+    db.query(sql,
         [
-            user.email,
+            user.correo,
             user.password,
-            user.email,
+            user.correo,
             user.password,
         ],
         (err, res) => {
@@ -61,13 +61,23 @@ User.login = (user, result) => {
 
 User.updatePassword = (user, result) => {
     const sql = 'UPDATE cliente SET password = ? WHERE id_cliente = ?';
-    db.query(sql, [user.password, user.id], (err, res) => {
+    db.query(sql, [user.password, user.id_cliente], (err, res) => {
         if (err) {
             result(err, null);
         } else {
             result(null, res);
         }
     });
+};
+
+
+User.empresas = (user, result) => {
+    const sql = `SELECT 'cliente' AS tipo, correo, contraseña, celular FROM cliente WHERE correo = ? AND contraseña = ? AND celular = ?' 
+    UNION ALL SELECT  'empresa' AS tipo, correo, contraseña, telefono FROM empresa WHERE correo =? AND contraseña = ? AND telefono = ?`
+    db.query(sql, [
+        user.correo,
+        user.
+    ]);
 };
 
 

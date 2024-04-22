@@ -3,6 +3,7 @@ module.exports = {
 
     register(req, res) {
         const user = req.body; //Datos del usuario desde el front-end
+
         User.register(user, (err, data) => {
             if (err) {
                 return res.status(501).json(
@@ -71,6 +72,27 @@ module.exports = {
         });
     },
 
+    empresas (req, res) {
+        const user = req.body; //Datos del usuario desde el front-end
+        User.empresas(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al mostrar empresa',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Empresas encontradas',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    }
 
 
 
