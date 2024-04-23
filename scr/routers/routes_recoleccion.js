@@ -1,6 +1,7 @@
 const { Router } = require('express'); 
 const router = Router(); //routes 
 const usersController = require('../controllers/recoleciones_controller');
+//por ver si se nesecita esta tabla
 router.post('/recoleciones/listado', cliente_controller.listado);
 router.post('/recoleciones/login', cliente_controller.login);
 router.post('/recoleciones/register', cliente_controller.register);

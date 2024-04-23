@@ -18,9 +18,9 @@ Company.register = (company, result) => {
                     sql,
                     [company.nombre_empresa,
                     company.NIT,
-                    company.correo,
                     company.telefono,
                     company.direccion,
+                    company.correo,
                     company.password],
                     (err, res) => {
                         if (err) {
@@ -34,6 +34,7 @@ Company.register = (company, result) => {
         }
     });
 };
+
 
 Company.login = (company, result) => {
     const sql =
@@ -58,6 +59,7 @@ Company.login = (company, result) => {
         }
     )
 };
+
 
 Company.updatePassword = (company, result) => {
     const sql = 'UPDATE empresa SET password = ? WHERE id_empresa = ?';

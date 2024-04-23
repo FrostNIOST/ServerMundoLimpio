@@ -71,14 +71,14 @@ User.updatePassword = (user, result) => {
 };
 
 
-User.empresas = (user, result) => {
+/**User.empresas = (user, result) => {
     const sql = `SELECT 'cliente' AS tipo, correo, contraseña, celular FROM cliente WHERE correo = ? AND contraseña = ? AND celular = ?' 
     UNION ALL SELECT  'empresa' AS tipo, correo, contraseña, telefono FROM empresa WHERE correo =? AND contraseña = ? AND telefono = ?`
     db.query(sql, [
         user.correo,
         user.
     ]);
-};
+};*/
 
 
 

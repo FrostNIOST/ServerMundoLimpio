@@ -15,7 +15,7 @@ app.use(express.json());
 //app.use(cors());
 
 //routes
-//app.use(require('./scr/routers/routes_cliente'));
+app.use(require('./scr/routers/routes_cliente'));
 app.use(require('./scr/routers/routes_empresa'));
 //app.use(require('./scr/routers/routes_recoleccion'));
 
