@@ -72,7 +72,7 @@ module.exports = {
         });
     },
 
-    empresas (req, res) {
+    /**empresas (req, res) {
         const user = req.body; //Datos del usuario desde el front-end
         User.empresas(user, (err, data) => {
             if (err) {
@@ -92,8 +92,73 @@ module.exports = {
                 }
             );
         });
-    }
+    } por verificar*/
 
+    update(req, res) {
+        const user = req.body; //Datos del usuario desde el front-end
+        User.update(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al actualizar el los datos',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Datos actualizados',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
+
+    defuse(req, res) {
+        const user = req.body; //Datos del usuario desde el front-end
+        User.defuse(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al desactivar cuenta',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Cuenta Desactivada',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
+
+    recolectar(req, res) {
+        const user = req.body; //Datos del usuario desde el front-end
+        User.recolectar(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al desactivar cuenta',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Cuenta Desactivada',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
 
 
 

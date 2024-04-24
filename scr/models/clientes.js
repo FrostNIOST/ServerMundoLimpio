@@ -60,7 +60,7 @@ User.login = (user, result) => {
 };
 
 User.updatePassword = (user, result) => {
-    const sql = 'UPDATE cliente SET password = ? WHERE id_cliente = ?';
+    const sql = `UPDATE cliente SET password = ? WHERE id_cliente = ?`;
     db.query(sql, [user.password, user.id_cliente], (err, res) => {
         if (err) {
             result(err, null);
@@ -80,7 +80,33 @@ User.updatePassword = (user, result) => {
     ]);
 };*/
 
+User.update = (user, result) => {
+    const sql = `UPDATE cliente SET nombre = ?, correo = ?, celular = ?  WHERE id_cliente = ?`;
+    db.query(sql, [user.nombre,
+        user.correo,
+        user.celular,
+        user.id_cliente],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
+};
 
+
+User.defuse = (user, result) => {
+    const sql = `UPDATE cliente SET status = "false"  WHERE id_cliente = ?`;
+    db.query(sql, [user.id_cliente],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
+};
 
 
 
