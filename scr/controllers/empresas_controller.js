@@ -72,7 +72,7 @@ module.exports = {
         });
     },
 
-    empresas (req, res) {
+    /**empresas (req, res) {
         const company = req.body; //Datos del usuario desde el front-end
         Company.empresas(company, (err, data) => {
             if (err) {
@@ -92,7 +92,7 @@ module.exports = {
                 }
             );
         });
-    }
+    }*/
 
 
 

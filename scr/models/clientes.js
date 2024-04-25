@@ -71,14 +71,16 @@ User.updatePassword = (user, result) => {
 };
 
 
-/**User.empresas = (user, result) => {
-    const sql = `SELECT 'cliente' AS tipo, correo, contraseña, celular FROM cliente WHERE correo = ? AND contraseña = ? AND celular = ?' 
-    UNION ALL SELECT  'empresa' AS tipo, correo, contraseña, telefono FROM empresa WHERE correo =? AND contraseña = ? AND telefono = ?`
-    db.query(sql, [
-        user.correo,
-        user.
-    ]);
-};*/
+User.empresas = (user, result) => {
+    const sql = `SELECT nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE id_empresa = ? OR NIT = ? OR especialidad = ? OR nombre_empresa LIKE = ?%`
+    db.query(sql, [], (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
+    };
 
 User.update = (user, result) => {
     const sql = `UPDATE cliente SET nombre = ?, correo = ?, celular = ?  WHERE id_cliente = ?`;

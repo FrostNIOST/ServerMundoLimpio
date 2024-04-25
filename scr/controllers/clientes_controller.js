@@ -72,14 +72,15 @@ module.exports = {
         });
     },
 
-    /**empresas (req, res) {
-        const user = req.body; //Datos del usuario desde el front-end
+
+    empresas (req, res) {
+        const user = req.query; //Datos del usuario desde el front-end
         User.empresas(user, (err, data) => {
             if (err) {
                 return res.status(501).json(
                     {
                         success: false,
-                        message: 'Error al mostrar empresa',
+                        message: 'Error al mostrar empresas',
                         error: err
                     }
                 );
@@ -92,7 +93,7 @@ module.exports = {
                 }
             );
         });
-    } por verificar*/
+    },
 
     update(req, res) {
         const user = req.body; //Datos del usuario desde el front-end
@@ -145,7 +146,7 @@ module.exports = {
                 return res.status(501).json(
                     {
                         success: false,
-                        message: 'Error al desactivar cuenta',
+                        message: 'Error solicitar recolección',
                         error: err
                     }
                 );
@@ -153,7 +154,7 @@ module.exports = {
             return res.status(201).json(
                 {
                     success: true,
-                    message: 'Cuenta Desactivada',
+                    message: 'Se solicito recolección',
                     data: data //Datos desde Model 
                 }
             );

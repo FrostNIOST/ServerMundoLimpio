@@ -7,7 +7,7 @@ const clientes_controller = require('../controllers/clientes_controller');
 /**router.get / '/cliente', (req, res) => {
     res.json({ message: 'Esta es la API para clientes' });
 }*/
-//router.get('/clientes', clientes_controller.empresas);//mostrar la lista de las empresas las empresas
+router.get('/clientes/empresas', clientes_controller.empresas);//mostrar la lista de las empresas /*dejar en empresa*/
 router.post('/clientes/login', clientes_controller.login); //iniciar sesion de un usuario y busca que tipo es, empresa o cliente /checked
 router.post('/clientes/register', clientes_controller.register); //registrar un usuario tipo cliente /checked
 router.post('/clientes/password', clientes_controller.updatePassword); //cambia la contraseña de un cliente /checked
