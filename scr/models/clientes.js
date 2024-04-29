@@ -74,20 +74,20 @@ User.updatePassword = (user, result) => {
 User.empresas = (user, result) => {
     const sql = `SELECT nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE id_empresa = ? OR NIT = ? OR especialidad = ? OR nombre_empresa LIKE = ?%`
     db.query(sql, [], (err, res) => {
-            if (err) {
-                result(err, null);
-            } else {
-                result(null, res);
-            }
-        });
-    };
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
 
 User.update = (user, result) => {
     const sql = `UPDATE cliente SET nombre = ?, correo = ?, celular = ?  WHERE id_cliente = ?`;
     db.query(sql, [user.nombre,
-        user.correo,
-        user.celular,
-        user.id_cliente],
+    user.correo,
+    user.celular,
+    user.id_cliente],
         (err, res) => {
             if (err) {
                 result(err, null);
@@ -108,6 +108,28 @@ User.defuse = (user, result) => {
                 result(null, res);
             }
         });
+};
+
+
+User.recolectar = (user, result) => {
+
+    //Si no existe, lo registra
+    const sql = `INSERT INTO recoleccion (fecha, ubicacion, celular, fecha_nacimiento, password) VALUES (?, ?, ?, ?, ?); `;
+    db.query(
+        sql,
+        [user.fecha,
+        user.ubicacion,
+        user.celular,
+        user.fecha_nacimiento,
+        user.password],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, { message: 'Recoleccion registrada: ' + res.insertId });
+            }
+        }
+    );
 };
 
 
