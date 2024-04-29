@@ -72,14 +72,14 @@ module.exports = {
         });
     },
 
-    /**empresas (req, res) {
-        const company = req.body; //Datos del usuario desde el front-end
-        Company.empresas(company, (err, data) => {
+    empresas (req, res) {
+        const user = req.query; //Datos del usuario desde el front-end
+        User.empresas(user, (err, data) => {
             if (err) {
                 return res.status(501).json(
                     {
                         success: false,
-                        message: 'Error al mostrar empresa',
+                        message: 'Error al mostrar empresas',
                         error: err
                     }
                 );
@@ -92,8 +92,7 @@ module.exports = {
                 }
             );
         });
-    }*/
-
+    },
 
 
 

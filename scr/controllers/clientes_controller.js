@@ -73,9 +73,14 @@ module.exports = {
     },
 
 
+   
     empresas (req, res) {
-        const user = req.query; //Datos del usuario desde el front-end
-        User.empresas(user, (err, data) => {
+        const id = req.query.id || null;
+        const nit  = req.query.nit || null;
+        const nombre =  req.query.nombre  || null;
+        const esp = req.query.esp || null;
+        
+        User.empresas(id, nit, nombre, esp, (err, data) => {
             if (err) {
                 return res.status(501).json(
                     {

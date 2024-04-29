@@ -74,6 +74,35 @@ Company.updatePassword = (company, result) => {
 };
 
 
+const consulta = null
+User.empresas = (user, result) => {
+    const id_empresa = req.query.id_empresa || null;
+    if (id_empresa) {
+        sql = sql + "id_empresa"
+    }
+    const NIT = req.query.NIT || null;
+    if (NIT) {
+        sql = sql + "NIT"
+    }
+    const especialidad = req.query.especialidad || null;
+    if (especialidad){
+        sql = sql + "especialidad"
+    }
+    const nombre_empresa = req.query.nombre_empresa || null;
+    if (nombre_empresa) {
+        sql = sql + "nombre_empresa"
+    }
+    const sql = `SELECT nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE *id_empresa = ? OR NIT = ? OR especialidad = ? OR nombre_empresa LIKE = ?%`
+    db.query(sql, [], (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
+
+
 
 
 

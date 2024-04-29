@@ -16,7 +16,7 @@ app.use(express.json());
 
 //routes
 app.use(require('./scr/routers/routes_cliente'));
-app.use(require('./scr/routers/routes_empresa'));
+//app.use(require('./scr/routers/routes_empresa'));
 //app.use(require('./scr/routers/routes_recoleccion'));
 
 //Inicializar el servidor

@@ -71,9 +71,55 @@ User.updatePassword = (user, result) => {
 };
 
 
-User.empresas = (user, result) => {
-    const sql = `SELECT nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE id_empresa = ? OR NIT = ? OR especialidad = ? OR nombre_empresa LIKE = ?%`
-    db.query(sql, [], (err, res) => {
+
+//id, nit, nombre, esp
+User.empresas = (id, nit, nombre, esp, result) => {
+    //console.log(id + "--" + nit + "--" + nombre + "--" + esp + "------");
+    let sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE `;
+    let ya =  false;
+    let parametros = [];
+ 
+    if (id) {
+        sql = sql + "id_empresa = ?";
+        ya = true;
+        parametros.push(id);
+    }
+
+    if(nit){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "NIT = ?";
+        ya = true;
+        parametros.push(nit);
+    }
+
+    if(nombre){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "nombre_empresa LIKE ?";
+        ya = true;
+        parametros.push("%" + nombre +"%");
+    }
+
+    if(esp){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "especialidad LIKE ?";
+        ya = true;
+        parametros.push("%" + esp  + "%");
+    }
+
+    if  (!ya) {
+        sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa`;
+    }
+
+    //console.log("sql: "+ sql);
+    //console.log(parametros);   
+    
+    db.query(sql, parametros, (err, res) => {
         if (err) {
             result(err, null);
         } else {
@@ -81,6 +127,7 @@ User.empresas = (user, result) => {
         }
     });
 };
+
 
 User.update = (user, result) => {
     const sql = `UPDATE cliente SET nombre = ?, correo = ?, celular = ?  WHERE id_cliente = ?`;
