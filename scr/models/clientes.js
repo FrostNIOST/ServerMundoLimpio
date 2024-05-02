@@ -129,12 +129,12 @@ User.empresas = (id, nit, nombre, esp, result) => {
 };
 
 
-User.update = (user, result) => {
+User.update = (id, result) => {
     const sql = `UPDATE cliente SET nombre = ?, correo = ?, celular = ?  WHERE id_cliente = ?`;
-    db.query(sql, [user.nombre,
-    user.correo,
-    user.celular,
-    user.id_cliente],
+    db.query(sql, [id.nombre,
+    id.correo,
+    id.celular,
+    id.id_cliente],
         (err, res) => {
             if (err) {
                 result(err, null);
@@ -143,6 +143,21 @@ User.update = (user, result) => {
             }
         });
 };
+
+
+
+
+/*User.update = (id, result) => {
+    const sql = `SELECT * FROM CLIENTES`;
+    db.query(sql, [id],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
+};*/
 
 
 User.defuse = (user, result) => {

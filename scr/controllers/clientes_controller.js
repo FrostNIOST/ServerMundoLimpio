@@ -100,9 +100,32 @@ module.exports = {
         });
     },
 
-    update(req, res) {
+    /*update(req, res) {
         const user = req.body; //Datos del usuario desde el front-end
         User.update(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al actualizar el los datos',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Datos actualizados',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },*/
+
+
+    update(req, res) {
+        const id = req.body; //Datos del usuario desde el front-end
+        User.update(id, (err, data) => {
             if (err) {
                 return res.status(501).json(
                     {

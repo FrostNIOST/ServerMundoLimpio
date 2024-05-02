@@ -1,0 +1,5 @@
+?id=14&nit=20&nombre=san&esp=plas
+
+ocalhost:3000/clientes/empresas?id=13&nit=3579412564875&nombre=reen&esp=plas
+
+SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE nombre_empresa = '%reen%' OR especialidad = '%plas%'

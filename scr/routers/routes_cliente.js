@@ -11,11 +11,15 @@ router.get('/clientes/empresas', clientes_controller.empresas);         //mostra
 router.post('/clientes/login', clientes_controller.login);              //iniciar sesion de un usuario y busca que tipo es, empresa o cliente /checked
 router.post('/clientes/register', clientes_controller.register);        //registrar un usuario tipo cliente /checked
 router.post('/clientes/password', clientes_controller.updatePassword);  //cambia la contraseña de un cliente /checked
-router.put('/clientes/:id', clientes_controller.update);                //actualiza  los datos del cliente con el id que le pasen por parametro
-router.patch('/clientes/:id', clientes_controller.defuse);              //cambia el status del cliente para desactivar la cuenta
+router.put('/clientes', clientes_controller.update);                //actualiza  los datos del cliente con el id que le pasen por parametro
+router.patch('/clientes', clientes_controller.defuse);              //cambia el status del cliente para "desactivar" la cuenta
 router.post('clientes/recolecion'), clientes_controller.recolectar;     //el cliente hace  una recoleccion y la solicita
 //router.post('clientes/recolecion'), clientes_controller.recolectar;   //el cliente hace  una recoleccion y la solicita
 //router.get('clientes/recolecion), clientes_controller.recolectar;     // se muestra los datos  que el cliente tiene en recoleccion
+
+
+
+//Solo los get van por el metodo params
 
 
 module.exports = router;
