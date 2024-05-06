@@ -73,32 +73,6 @@ module.exports = {
     },
 
 
-   
-    empresas (req, res) {
-        const id = req.query.id || null;
-        const nit  = req.query.nit || null;
-        const nombre =  req.query.nombre  || null;
-        const esp = req.query.esp || null;
-        
-        User.empresas(id, nit, nombre, esp, (err, data) => {
-            if (err) {
-                return res.status(501).json(
-                    {
-                        success: false,
-                        message: 'Error al mostrar empresas',
-                        error: err
-                    }
-                );
-            }
-            return res.status(201).json(
-                {
-                    success: true,
-                    message: 'Empresas encontradas',
-                    data: data //Datos desde Model 
-                }
-            );
-        });
-    },
 
     /*update(req, res) {
         const user = req.body; //Datos del usuario desde el front-end

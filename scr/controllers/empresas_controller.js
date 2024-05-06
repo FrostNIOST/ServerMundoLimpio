@@ -73,8 +73,12 @@ module.exports = {
     },
 
     empresas (req, res) {
-        const user = req.query; //Datos del usuario desde el front-end
-        User.empresas(user, (err, data) => {
+        const id = req.query.id || null;
+        const nit  = req.query.nit || null;
+        const nombre =  req.query.nombre  || null;
+        const esp = req.query.esp || null;
+        
+        Company.empresas(id, nit, nombre, esp, (err, data) => {
             if (err) {
                 return res.status(501).json(
                     {
@@ -88,6 +92,52 @@ module.exports = {
                 {
                     success: true,
                     message: 'Empresas encontradas',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
+
+
+    update(req, res) {
+        const id = req.body; //Datos del usuario desde el front-end
+        Company.update(id, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al actualizar el los datos',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Datos actualizados',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
+
+
+    defuse(req, res) {
+        const company = req.body; //Datos del usuario desde el front-end
+        Company.defuse(company, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error al desactivar cuenta',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Cuenta Desactivada',
                     data: data //Datos desde Model 
                 }
             );

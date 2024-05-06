@@ -74,32 +74,89 @@ Company.updatePassword = (company, result) => {
 };
 
 
-const consulta = null
-User.empresas = (user, result) => {
-    const id_empresa = req.query.id_empresa || null;
-    if (id_empresa) {
-        sql = sql + "id_empresa"
+//id, nit, nombre, esp
+Company.empresas = (id, nit, nombre, esp, result) => {
+    //console.log(id + "--" + nit + "--" + nombre + "--" + esp + "------");
+    let sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE `;
+    let ya =  false;
+    let parametros = [];
+ 
+    if (id) {
+        sql = sql + "id_empresa = ?";
+        ya = true;
+        parametros.push(id);
     }
-    const NIT = req.query.NIT || null;
-    if (NIT) {
-        sql = sql + "NIT"
+
+    if(nit){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "NIT = ?";
+        ya = true;
+        parametros.push(nit);
     }
-    const especialidad = req.query.especialidad || null;
-    if (especialidad){
-        sql = sql + "especialidad"
+
+    if(nombre){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "nombre_empresa LIKE ?";
+        ya = true;
+        parametros.push("%" + nombre +"%");
     }
-    const nombre_empresa = req.query.nombre_empresa || null;
-    if (nombre_empresa) {
-        sql = sql + "nombre_empresa"
+
+    if(esp){
+        if(ya){
+            sql += " OR ";
+        }
+        sql = sql + "especialidad LIKE ?";
+        ya = true;
+        parametros.push("%" + esp  + "%");
     }
-    const sql = `SELECT nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE *id_empresa = ? OR NIT = ? OR especialidad = ? OR nombre_empresa LIKE = ?%`
-    db.query(sql, [], (err, res) => {
+
+    if  (!ya) {
+        sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa`;
+    }
+
+    //console.log("sql: "+ sql);
+    //console.log(parametros);   
+    
+    db.query(sql, parametros, (err, res) => {
         if (err) {
             result(err, null);
         } else {
             result(null, res);
         }
     });
+};
+
+
+Company.update = (id, result) => {
+    const sql = `UPDATE empresa SET nombre_empresa = ?, correo = ?, telefono = ?  WHERE id_empresa = ?`;
+    db.query(sql, [id.nombre_empresa,
+    id.correo,
+    id.telefono,
+    id.id_empresa],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
+};
+
+
+Company.defuse = (company, result) => {
+    const sql = `UPDATE empresa SET status = "false"  WHERE id_empresa = ?`;
+    db.query(sql, [company.id_empresa],
+        (err, res) => {
+            if (err) {
+                result(err, null);
+            } else {
+                result(null, res);
+            }
+        });
 };
 
 

@@ -35,6 +35,7 @@ User.register = (user, result) => {
     });
 };
 
+
 User.login = (user, result) => {
     const sql =
         `SELECT id_cliente, nombre, 'cliente' AS tipo FROM cliente WHERE correo = ? AND password = ? 
@@ -59,67 +60,10 @@ User.login = (user, result) => {
     )
 };
 
+
 User.updatePassword = (user, result) => {
     const sql = `UPDATE cliente SET password = ? WHERE id_cliente = ?`;
     db.query(sql, [user.password, user.id_cliente], (err, res) => {
-        if (err) {
-            result(err, null);
-        } else {
-            result(null, res);
-        }
-    });
-};
-
-
-
-//id, nit, nombre, esp
-User.empresas = (id, nit, nombre, esp, result) => {
-    //console.log(id + "--" + nit + "--" + nombre + "--" + esp + "------");
-    let sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa WHERE `;
-    let ya =  false;
-    let parametros = [];
- 
-    if (id) {
-        sql = sql + "id_empresa = ?";
-        ya = true;
-        parametros.push(id);
-    }
-
-    if(nit){
-        if(ya){
-            sql += " OR ";
-        }
-        sql = sql + "NIT = ?";
-        ya = true;
-        parametros.push(nit);
-    }
-
-    if(nombre){
-        if(ya){
-            sql += " OR ";
-        }
-        sql = sql + "nombre_empresa LIKE ?";
-        ya = true;
-        parametros.push("%" + nombre +"%");
-    }
-
-    if(esp){
-        if(ya){
-            sql += " OR ";
-        }
-        sql = sql + "especialidad LIKE ?";
-        ya = true;
-        parametros.push("%" + esp  + "%");
-    }
-
-    if  (!ya) {
-        sql = `SELECT id_empresa, nombre_empresa, NIT, telefono, direccion, correo, especialidad FROM empresa`;
-    }
-
-    //console.log("sql: "+ sql);
-    //console.log(parametros);   
-    
-    db.query(sql, parametros, (err, res) => {
         if (err) {
             result(err, null);
         } else {
@@ -145,8 +89,6 @@ User.update = (id, result) => {
 };
 
 
-
-
 /*User.update = (id, result) => {
     const sql = `SELECT * FROM CLIENTES`;
     db.query(sql, [id],
@@ -160,6 +102,7 @@ User.update = (id, result) => {
 };*/
 
 
+
 User.defuse = (user, result) => {
     const sql = `UPDATE cliente SET status = "false"  WHERE id_cliente = ?`;
     db.query(sql, [user.id_cliente],
@@ -171,6 +114,8 @@ User.defuse = (user, result) => {
             }
         });
 };
+
+
 
 
 User.recolectar = (user, result) => {
