@@ -13,7 +13,8 @@ router.post('/clientes/register', clientes_controller.register);        //regist
 router.post('/clientes/password', clientes_controller.updatePassword);  //cambia la contraseña de un cliente /checked
 router.put('/clientes', clientes_controller.update);                    //actualiza  los datos del cliente con el id que le pasen por parametro
 router.patch('/clientes', clientes_controller.defuse);                  //cambia el status del cliente para "desactivar" la cuenta
-router.post('clientes/recolecion'), clientes_controller.recolectar;     //el cliente hace  una recoleccion y la solicita
+router.post('/clientes/recoleccion', clientes_controller.recolectar);     //el cliente hace  una recoleccion y la solicita (ingresa datos en la tabla de recolecion)
+router.post('/clientes/recolectarMaterial', clientes_controller.recolectarMaterial); //inserta datos en la tabla de materiales para asociarlos a la recolecion
 //router.post('clientes/recolecion'), clientes_controller.recolectar;   //el cliente hace  una recoleccion y la solicita
 //router.get('clientes/recolecion), clientes_controller.recolectar;     // se muestra los datos  que el cliente tiene en recoleccion
 

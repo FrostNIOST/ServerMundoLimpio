@@ -121,14 +121,13 @@ User.defuse = (user, result) => {
 User.recolectar = (user, result) => {
 
     //Si no existe, lo registra
-    const sql = `INSERT INTO recoleccion (fecha, ubicacion, celular, fecha_nacimiento, password) VALUES (?, ?, ?, ?, ?); `;
+    const sql = `INSERT INTO recoleccion (fecha, ubicacion, id_cliente, id_empresa) VALUES (?, ?, ?, ?); `;
     db.query(
         sql,
         [user.fecha,
         user.ubicacion,
-        user.celular,
-        user.fecha_nacimiento,
-        user.password],
+        user.id_cliente,
+        user.id_empresa],
         (err, res) => {
             if (err) {
                 result(err, null);
@@ -138,6 +137,24 @@ User.recolectar = (user, result) => {
         }
     );
 };
+
+
+User.recolectarMaterial = (material, result) => {
+    // Crear una matriz de valores a insertar
+    const values = material.map(item => [item.id_materia, item.id_cantidad, item.recoleccion]);
+    // Crear la consulta SQL
+    const sql = `INSERT INTO materia_recoleccion (id_materia, cantidad_kg, id_recoleccion) VALUES 
+    ?`;
+    db.query(sql, [values], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        console.log("Registros creados: ", { affectedRows: res.affectedRows }); //Only for debugging
+        result(null, { message: 'Registros creados: ' + res.affectedRows });
+    });
+}
 
 
 

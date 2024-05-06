@@ -164,6 +164,29 @@ module.exports = {
     },
 
 
+    recolectarMaterial(req, res) {
+        const user = req.body; //Datos del usuario desde el front-end
+        User.recolectarMaterial(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error solicitar recolección',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Se solicito recolección',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
+
+
 
 
 }
