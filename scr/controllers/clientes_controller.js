@@ -73,7 +73,6 @@ module.exports = {
     },
 
 
-
     /*update(req, res) {
         const user = req.body; //Datos del usuario desde el front-end
         User.update(user, (err, data) => {
@@ -163,9 +162,9 @@ module.exports = {
         });
     },
 
-
     recolectarMaterial(req, res) {
         const user = req.body; //Datos del usuario desde el front-end
+        //console.log('Controlador', user);
         User.recolectarMaterial(user, (err, data) => {
             if (err) {
                 return res.status(501).json(
@@ -185,6 +184,52 @@ module.exports = {
             );
         });
     },
+
+    list(req, res) {
+        //verifica si existe parametro id por query
+        const idClient = req.query.id || null;
+        if (idClient) {
+            User.listOne(idClient, (err, data) => {
+                if (err) {
+                    return res.status(501).json(
+                        {
+                            success: false,
+                            message: 'Error al listar las recolecciones del cliente',
+                            error: err
+                        }
+                    );
+                }
+                return res.status(201).json(
+                    {
+                        success: true,
+                        message: 'Recolecciones listadas',
+                        data: data //Datos desde Model 
+                    }
+                );
+            });
+        }
+        else { //los consulta todos
+            User.listAll((err, data) => {
+                if (err) {
+                    return res.status(501).json(
+                        {
+                            success: false,
+                            message: 'Error al listar todas las recolecciones',
+                            error: err
+                        }
+                    );
+                }
+                return res.status(201).json(
+                    {
+                        success: true,
+                        message: 'Recolecciones listadas',
+                        data: data //Datos desde Model 
+                    }
+                );
+            });
+        }
+    }
+
 
 
 

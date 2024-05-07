@@ -98,7 +98,6 @@ module.exports = {
         });
     },
 
-
     update(req, res) {
         const id = req.body; //Datos del usuario desde el front-end
         Company.update(id, (err, data) => {
@@ -120,7 +119,6 @@ module.exports = {
             );
         });
     },
-
 
     defuse(req, res) {
         const company = req.body; //Datos del usuario desde el front-end
@@ -144,7 +142,50 @@ module.exports = {
         });
     },
 
-
+    list(req, res) {
+        //verifica si existe parametro id por query
+        const idClient = req.query.id || null;
+        if (idClient) {
+            Company.listOne(idClient, (err, data) => {
+                if (err) {
+                    return res.status(501).json(
+                        {
+                            success: false,
+                            message: 'Error al listar las recolecciones de la empresa',
+                            error: err
+                        }
+                    );
+                }
+                return res.status(201).json(
+                    {
+                        success: true,
+                        message: 'Recolecciones listadas',
+                        data: data //Datos desde Model 
+                    }
+                );
+            });
+        }
+        else { //los consulta todos
+            Company.listAll((err, data) => {
+                if (err) {
+                    return res.status(501).json(
+                        {
+                            success: false,
+                            message: 'Error al listar todas las recolecciones',
+                            error: err
+                        }
+                    );
+                }
+                return res.status(201).json(
+                    {
+                        success: true,
+                        message: 'Recolecciones listadas',
+                        data: data //Datos desde Model 
+                    }
+                );
+            });
+        }
+    }
 
 
 }

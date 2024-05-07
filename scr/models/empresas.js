@@ -160,7 +160,39 @@ Company.defuse = (company, result) => {
 };
 
 
+Company.listOne = (idCompany, result) => {
+    //Consulta la recolección por id del cliente y para cada recolección, los materiales recolectados
+    // devolver la consulta como un objeto anidado json
+    const sql = `SELECT 
+    r.id_recoleccion, r.ubicacion, r.fecha, m.id_materia, m.nombre_materia, mr.cantidad_kg FROM recoleccion r 
+    JOIN materia_recoleccion mr ON r.id_recoleccion = mr.id_recoleccion
+    JOIN materia m ON mr.id_materia = m.id_materia WHERE r.id_empresa = ?`; //HACER UN JOIN PARA VER LOS NOMBRES DE LA EMPRESA
+    db.query(sql, [idCompany], (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
 
+
+Company.listAll = (result) => {
+    //Consulta todas recolecciónes, los materiales recolectados
+    // devolver la consulta como un objeto anidado json
+    //Faltan datos del cliente y empresa
+    const sql = `SELECT 
+    r.id_recoleccion, r.ubicacion, r.fecha, m.id_materia, m.nombre_materia, mr.cantidad_kg FROM recoleccion r
+    JOIN materia_recoleccion mr ON r.id_recoleccion = mr.id_recoleccion
+    JOIN materia m ON mr.id_materia = m.id_materia WHERE r.id_empresa = ?`; //HACER EL JOIN PARA VER EL NOMBRE DEL CLIENTE
+    db.query(sql, (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+}
 
 
 

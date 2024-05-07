@@ -11,7 +11,8 @@ router.post('/empresas/register', empresas_controller.register);        //regist
 router.post('/empresas/password', empresas_controller.updatePassword);  //cambia la contraseña de una empresa //checked
 router.put('/empresas', empresas_controller.update);                    //actualiza  los datos del cliente con el id que le pasen por parametro
 router.patch('/empresas', empresas_controller.defuse);                  //cambia el status del cliente para desctivar la cuenta
-//router.get('empresas/recolecion), empresas_controller.recolectar;     // se muestra los datos  que el cliente tiene en recoleccion
+router.get('/empresas/recoleccion', empresas_controller.list);          // se muestra los datos  que la empresa tiene en recoleccion
+//router.get('empresas/recolecion), empresas_controller.listaRecoleccion;     //se muestra las recoleciones que la empresa tiene en recoleccion
 
 
 

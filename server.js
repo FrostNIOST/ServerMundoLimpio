@@ -17,7 +17,7 @@ app.use(express.json());
 //routes
 app.use(require('./scr/routers/routes_cliente'));
 app.use(require('./scr/routers/routes_empresa'));
-//app.use(require('./scr/routers/routes_recoleccion')); Este es precindible segun el requirimiento de las pantallas y la app
+
 
 //Inicializar el servidor
 app.listen(3000, () => {

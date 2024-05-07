@@ -116,8 +116,6 @@ User.defuse = (user, result) => {
 };
 
 
-
-
 User.recolectar = (user, result) => {
 
     //Si no existe, lo registra
@@ -141,9 +139,11 @@ User.recolectar = (user, result) => {
 
 User.recolectarMaterial = (material, result) => {
     // Crear una matriz de valores a insertar
-    const values = material.map(item => [item.id_materia, item.id_cantidad, item.recoleccion]);
+    //console.log('Recolectando materiales', material);
+    const values = material.map(item => [item.id_materia, item.cantidad_Kg, item.id_recoleccion]);
     // Crear la consulta SQL
-    const sql = `INSERT INTO materia_recoleccion (id_materia, cantidad_kg, id_recoleccion) VALUES 
+    //console.log('Mapeado ', values);
+    const sql = `INSERT INTO materia_recoleccion (id_materia, cantidad_Kg, id_recoleccion) VALUES 
     ?`;
     db.query(sql, [values], (err, res) => {
         if (err) {
@@ -154,7 +154,43 @@ User.recolectarMaterial = (material, result) => {
         console.log("Registros creados: ", { affectedRows: res.affectedRows }); //Only for debugging
         result(null, { message: 'Registros creados: ' + res.affectedRows });
     });
+};
+
+
+User.listOne = (idClient, result) => {
+    //Consulta la recolección por id del cliente y para cada recolección, los materiales recolectados
+    // devolver la consulta como un objeto anidado json
+    const sql = `SELECT 
+    r.id_recoleccion, r.ubicacion, r.fecha, m.id_materia, m.nombre_materia, mr.cantidad_kg FROM recoleccion r 
+    JOIN materia_recoleccion mr ON r.id_recoleccion = mr.id_recoleccion
+    JOIN materia m ON mr.id_materia = m.id_materia WHERE r.id_cliente = ?`; //HACER UN JOIN PARA VER LOS NOMBRES DE LA EMPRESA
+    db.query(sql, [idClient], (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
+};
+
+
+User.listAll = (result) => {
+    //Consulta todas recolecciónes, los materiales recolectados
+    // devolver la consulta como un objeto anidado json
+    //Faltan datos del cliente y empresa
+    const sql = `SELECT 
+    r.id_recoleccion, r.ubicacion, r.fecha, m.id_materia, m.nombre_materia, mr.cantidad_kg FROM recoleccion r
+    JOIN materia_recoleccion mr ON r.id_recoleccion = mr.id_recoleccion
+    JOIN materia m ON mr.id_materia = m.id_materia WHERE r.id_cliente = ?`; //HACER EL JOIN PARA VER LA EMPRESA
+    db.query(sql, (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res);
+        }
+    });
 }
+
 
 
 
