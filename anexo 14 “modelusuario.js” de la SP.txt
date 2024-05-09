@@ -1,0 +1,24 @@
+anexo 14 “model/usuario.js” de la SPA
+
+anexo 15 model/empresa.js” de la SPA
+
+
+SETS desde usuario cliente:
+set lista de empresas: descripcion
+ubicacion
+telefono
+correo
+imagen
+set recoleccion: id recoleccion
+estado
+material
+cantidad
+fecha
+nombre empresa
+direccion
+
+
+
+SETS desde usuario empresa.
+(mismos sets empresa)
+(mismos sets envios (pero en vez de nombre del de la empresa es nombre del usuario))

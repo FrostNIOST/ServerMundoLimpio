@@ -15,7 +15,6 @@ router.patch('/clientes', clientes_controller.defuse);                  //cambia
 router.post('/clientes/recoleccion', clientes_controller.recolectar);     //el cliente hace  una recoleccion y la solicita (ingresa datos en la tabla de recolecion)
 router.post('/clientes/recolectarMaterial', clientes_controller.recolectarMaterial); //inserta datos en la tabla de materiales para asociarlos a la recolecion
 router.get('/clientes/recoleccion', clientes_controller.list);     // se muestra los datos  que el cliente tiene en recoleccion
-//router.get('/user/empresas', clientes_controller.empresas);           //mostrar la lista de las empresas  segun filtro  empresa PK (id), nit, nombre y/o especialidad (esp) /*dejar en empresa*/
 //router.post('clientes/recolecion'), clientes_controller.recolectar;   //el cliente hace  una recoleccion y la solicita CON LAS DE ARRIBA ESTA NO TENDRIA SENTIDO
 
 
