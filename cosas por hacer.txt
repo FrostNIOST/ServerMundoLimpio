@@ -1,0 +1,4 @@
+pasar los modales al controlador o donde se cargan los templates, 
+corregir los mismos nombres del index para que coincida en la base de datos,
+corregir los modales,
+copiar el login y verificar su funcionamiento
