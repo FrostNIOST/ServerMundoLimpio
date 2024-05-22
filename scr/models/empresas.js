@@ -13,7 +13,7 @@ Company.register = (company, result) => {
                 result(null, { message: 'empresa ya registrado' });
             } else {
                 //Si no existe, lo registra
-                const sql = `INSERT INTO empresa (nombre_empresa, NIT, telefono, direccion, correo, password, especialidad) VALUES (?, ?, ?, ?, ?, ?, ?); `;
+                const sql = `INSERT INTO empresa (nombre_empresa, NIT, telefono, direccion, correo, especialidad, password) VALUES (?, ?, ?, ?, ?, ?, ?); `;
                 db.query(
                     sql,
                     [company.nombre_empresa,
@@ -21,8 +21,8 @@ Company.register = (company, result) => {
                     company.telefono,
                     company.direccion,
                     company.correo,
-                    company.password,
-                    company.especialidad],
+                    company.especialidad,
+                    company.password],
                     (err, res) => {
                         if (err) {
                             result(err, null);

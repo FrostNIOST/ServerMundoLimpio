@@ -54,6 +54,7 @@ User.login = (user, result) => {
                 console.log('Model error: ', err); //for debugging
                 result(err, null);
             } else {
+                console.log(res);
                 result(null, res);
             }
         }
