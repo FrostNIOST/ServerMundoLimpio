@@ -1,0 +1,23 @@
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+  margin-top: 14%;
+
+caandres@gmail.com
+
+INSERT INTO recoleccion (fecha -, ubicacion -, id_cliente (no se como obtenerlo), id_empresa (por verificar)) VALUES (?, ?, ?, ?)
+INSERT INTO materia_recoleccion (id_materia -, cantidad_Kg -, id_recoleccion(no se como insertarlo)) VALUES 
+
+correccion a pantalla
+recoleccion: fecha, 
+materia recoleccion:   kg, 
+pendiente categoria (posiblemente cambiar)
+
+
+
+cambiar al siguiente orden
+empresa a solicitar
+direccion
+fecha del intercambio
+materia prima 
+cantidad
