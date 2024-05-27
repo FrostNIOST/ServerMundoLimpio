@@ -131,7 +131,7 @@ User.recolectar = (user, result) => {
             if (err) {
                 result(err, null);
             } else {
-                result(null, { message: 'Recoleccion registrada: ' + res.insertId });
+                result(null, res.insertId );
             }
         }
     );
