@@ -138,6 +138,10 @@ User.recolectar = (user, result) => {
 };
 
 
+
+
+
+
 User.recolectarMaterial = (material, result) => {
     // Crear una matriz de valores a insertar
     //console.log('Recolectando materiales', material);

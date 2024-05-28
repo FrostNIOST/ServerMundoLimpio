@@ -228,7 +228,30 @@ module.exports = {
                 );
             });
         }
-    }
+    },
+
+
+    listarMaterial(req, res) {
+        const user = req.query; //Datos del usuario desde el front-end
+        User.listarMaterial(user, (err, data) => {
+            if (err) {
+                return res.status(501).json(
+                    {
+                        success: false,
+                        message: 'Error solicitar recolección',
+                        error: err
+                    }
+                );
+            }
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: 'Se solicito recolección',
+                    data: data //Datos desde Model 
+                }
+            );
+        });
+    },
 
 
 
